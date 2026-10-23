@@ -2,57 +2,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SpeakNaija</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #101820;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-    }
-    h1 { color: #00d084; }
-    input, button {
-      padding: 12px;
-      border: 0;
-      border-radius: 8px;
-      margin: 6px;
-    }
-    button {
-      background: #00d084;
-      cursor: pointer;
-    }
-    #result { margin-top: 20px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07140e">
+<title>SpeakNaija — Nigerian Language Academy</title>
+<style>
+:root {
+  --green:#00e68a;
+  --gold:#ffd166;
+  --bg:#07140e;
+  --card:#12231a;
+  --muted:#a9c0b1;
+  --white:#f6fff8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at top,#174d32,transparent 48%),var(--bg);
+  color:var(--white);font-family:Arial,sans-serif;
+}
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 6%;border-bottom:1px solid #294b36;
+  background:#07140eeF;position:sticky;top:0;z-index:5;
+  backdrop-filter:blur(14px);
+}
+.logo{font-size:22px;font-weight:900;color:var(--green)}
+.flag{font-size:12px;color:var(--gold)}
+main{max-width:850px;margin:32px auto;padding:0 16px}
+.hero{text-align:center;padding:28px 0}
+.pill{color:var(--green);border:1px solid #286e48;
+padding:9px 14px;border-radius:30px;font-size:12px}
+h1{font-size:clamp(36px,8vw,58px);line-height:1.08;
+letter-spacing:-2px;margin:23px 0 14px}
+h1 span{color:var(--green)}
+p{line-height:1.65}
+.muted{color:var(--muted)}
+.card{
+  background:linear-gradient(145deg,#162c20,#101b15);
+  border:1px solid #31513b;border-radius:22px;
+  padding:22px;margin:18px 0;box-shadow:0 15px 40px #0003;
+}
+h2{font-size:21px}
+select,input{
+  width:100%;padding:14px;background:#09150e;
+  color:white;border:1px solid #365340;border-radius:12px;
+  font-size:15px;outline:none;margin:6px 0;
+}
+button{
+  background:var(--green);color:#062014;border:0;
+  padding:14px 16px;border-radius:12px;font-weight:bold;
+  cursor:pointer;transition:.2s;font-size:14px;
+}
+button:hover{filter:brightness(1.1);transform:translateY(-1px)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.secondary{background:#213a2b;color:#eaffef;border:1px solid #41634b}
+.gold{background:var(--gold);color:#2b2100}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.buttons button{flex:1;min-width:130px}
+.word{
+  font-size:32px;font-weight:900;color:var(--green);
+  margin:18px 0 8px;overflow-wrap:anywhere;
+}
+.translation{color:var(--gold);font-size:17px}
+.tip{background:#09170f;border-left:3px solid var(--green);
+padding:14px;border-radius:0 12px 12px 0;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{
+  text-align:left;background:#13251a;border:1px solid #31513b;
+  color:white;padding:17px;border-radius:15px;cursor:pointer;
+}
+.tile strong{display:block;color:var(--green);margin-bottom:8px}
+.tile small{color:var(--muted)}
+.status{font-size:14px;color:var(--gold);min-height:22px;margin-top:12px}
+.price{font-size:38px;font-weight:900;color:var(--gold)}
+.premium{
+  background:linear-gradient(135deg,#1b3e27,#132319);
+  border:1px solid #8d7535;
+}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+@media(max-width:480px){
+ header{padding:15px}
+ .card{padding:17px}
+ .grid{gap:8px}
+ .tile{padding:12px}
+}
+</style>
 </head>
 <body>
-  <h1>SpeakNaija 🇳🇬</h1>
-  <p>Learn Naija Pidgin and connect better.</p>
 
-  <input id="search" placeholder="Search a Naija phrase">
-  <button onclick="searchPhrase()">Search</button>
+<header>
+  <div class="logo">SpeakNaija 🇳🇬</div>
+  <div class="flag">LEARN • SPEAK • CONNECT</div>
+</header>
 
-  <div id="result">Abeg — Please</div>
+<main>
+<section class="hero">
+  <span class="pill">YOUR NIGERIAN LANGUAGE ACADEMY</span>
+  <h1>Find Your Voice.<br><span>Speak Naija.</span></h1>
+  <p class="muted">Listen to a lesson, learn how to pronounce it,
+  and practise speaking with your microphone.</p>
+</section>
 
-  <script>
-    function searchPhrase() {
-      const phrases = {
-        "abeg": "Abeg means Please.",
-        "how far": "How far means How are you?",
-        "no wahala": "No wahala means No problem.",
-        "wetin": "Wetin means What?",
-        "i dey": "I dey means I am fine / I am here."
-      };
+<section class="card">
+  <h2>🌍 Choose your language</h2>
+  <select id="language">
+    <option value="pidgin">Nigerian Pidgin</option>
+    <option value="hausa">Hausa</option>
+    <option value="yoruba">Yoruba</option>
+    <option value="igbo">Igbo</option>
+  </select>
 
-      const word = document.getElementById("search").value
-        .trim().toLowerCase();
+  <p class="muted">Select a lesson to start learning.</p>
+  <select id="lesson">
+    <option value="0">Greetings</option>
+    <option value="1">Everyday conversation</option>
+    <option value="2">Polite expressions</option>
+    <option value="3">Making friends</option>
+  </select>
 
-      document.getElementById("result").textContent =
-        phrases[word] || "Phrase not found. Try another phrase.";
-    }
-  </script>
+  <button id="load" style="width:100%">Load my lesson →</button>
+</section>
+
+<section class="card" id="tutor">
+  <div class="flag">YOUR VOICE TUTOR</div>
+  <div class="word" id="phrase">How far?</div>
+  <div class="translation" id="meaning">Meaning: How are you?</div>
+  <p id="example">Example: How far, my friend?</p>
+
+  <div class="tip">
+    <strong>🧑🏽‍🏫 Learn how to say it</strong>
+    <p id="explain">Listen carefully to the phrase. Repeat it slowly.
+    Pay attention to the sounds and rhythm.</p>
+  </div>
+
+  <div class="buttons">
+    <button id="hear">🔊 Listen to tutor</button>
+    <button class="secondary" id="repeat">🎙️ Repeat after tutor</button>
+  </div>
+
+  <div class="buttons">
+    <button class="secondary" id="listen">🎤 Speak now</button>
+    <button class="secondary" id="next">Next lesson →</button>
+  </div>
+
+  <p class="status" id="status" aria-live="polite">
+    Choose a language and tap Listen to tutor.
+  </p>
+  <p class="muted" id="heard"></p>
+</section>
+
+<section>
+  <h2>✨ Explore the four languages</h2>
+  <div class="grid">
+    <button class="tile" data-lang="hausa">
+      <strong>🟢 Hausa</strong><small>Greetings and daily speech</small>
+    </button>
+    <button class="tile" data-lang="yoruba">
+      <strong>🟡 Yoruba</strong><small>Words, tone and expressions</small>
+    </button>
+    <button class="tile" data-lang="igbo">
+      <strong>🔴 Igbo</strong><small>Conversation and culture</small>
+    </button>
+    <button class="tile" data-lang="pidgin">
+      <strong>🇳🇬 Naija Pidgin</strong><small>Everyday street expressions</small>
+    </button>
+  </div>
+</section>
+
+<section class="card premium">
+  <div class="flag">⭐ SPEAKNAIJA PREMIUM</div>
+  <h2>Take your learning further</h2>
+  <div class="price">₦10,000</div>
+  <p class="muted">Premium Class subscription</p>
+  <p>Premium lessons and structured practice are planned
+  for this membership.</p>
+  <button class="gold" id="subscribe" style="width:100%">
+    Subscribe to Premium
+  </button>
+  <p class="status" id="premiumStatus">
+    Subscription payment is not connected yet.
+  </p>
+</section>
+</main>
+
+<footer>SpeakNaija 🇳🇬 · Built to celebrate Nigerian languages.</footer>
+
+<script>
+const courses = {
+  pidgin: [
+    ["How far?","How are you? / What's up?",
+     "How far, my friend?","Say it naturally like a friendly greeting."],
+    ["Wetin happen?","What happened?",
+     "Wetin happen for here?","Listen for the rhythm of the whole phrase."],
+    ["Abeg","Please",
+     "Abeg, help me.","Use a polite, friendly tone when asking."],
+    ["You dey alright?","Are you okay?",
+     "My guy, you dey alright?","Keep the delivery relaxed and conversational."]
+  ],
+  hausa: [
+    ["Sannu","Hello",
+     "Sannu!","Start with a clear, gentle greeting."],
+    ["Yaya kake?","How are you? (to a male)",
+     "Sannu, yaya kake?","Listen to each syllable and repeat at a steady pace."],
+    ["Na gode","Thank you",
+     "Na gode sosai.","Say it clearly and politely."],
+    ["Sunanka wa?","What is your name? (to a male)",
+     "Sunanka wa?","Practise the complete question."]
+  ],
+  yoruba: [
+    ["Ẹ káàárọ̀","Good morning",
+     "Ẹ káàárọ̀ o.","Pay attention to the tone marks; tones can change meaning."],
+    ["Báwo ni?","How are you?",
+     "Báwo ni?","Speak slowly and keep the vowel sounds clear."],
+    ["Ẹ ṣé","Thank you",
+     "Ẹ ṣé gan-an.","Use a respectful tone."],
+    ["Kí ni orúkọ rẹ?","What is your name?",
+     "Kí ni orúkọ rẹ?","Listen to the complete phrase before repeating."]
+  ],
+  igbo: [
+    ["Ndewo","Hello",
+     "Ndewo!","Start with a clear and friendly greeting."],
+    ["Kedu?","How are you? / What's up?",
+     "Ndewo, kedu?","Listen to the vowel sounds and repeat carefully."],
+    ["Daalụ","Thank you / well done",
+     "Daalụ nke ukwuu.","Practise the phrase slowly."],
+    ["Kedu aha gị?","What is your name?",
+     "Kedu aha gị?","Listen to the question as one phrase."]
+  ]
+};
+
+const voices = {
+  pidgin: "en-NG",
+  hausa: "ha-NG",
+  yoruba: "yo-NG",
+  igbo: "ig-NG"
+};
+
+const $ = id => document.getElementById(id);
+let current = courses.pidgin[0];
+let recognition = null;
+
+function setStatus(text) {
+  $("status").textContent = text;
+}
+
+function loadLesson() {
+  const lang = $("language").value;
+  const index = Number($("lesson").value);
+  current = courses[lang][index];
+
+  $("phrase").textContent = current[0];
+  $("meaning").textContent = "Meaning: " + current[1];
+  $("example").textContent = "Example: " + current[2];
+  $("explain").textContent = current[3];
+  $("heard").textContent = "";
+  setStatus("Lesson loaded. Tap Listen to tutor.");
+}
+
+function speak(text) {
+  if (!("speechSynthesis" in window)) {
+    setStatus("Your browser does not support voice playback.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = voices[$("language").value];
+  utterance.rate = 0.78;
+
+  const available = speechSynthesis.getVoices();
+  const langPrefix = utterance.lang.toLowerCase().split("-")[0];
+  const match = available.find(v =>
+    v.lang.toLowerCase().startsWith(langPrefix)
+  );
+
+  if (match) utterance.voice = match;
+
+  utterance.onstart = () => setStatus("🔊 Tutor is speaking...");
+  utterance.onend = () => setStatus(
+    "Your turn! Tap Speak now and repeat the phrase."
+  );
+  utterance.onerror = () => setStatus(
+    "Voice playback failed. Try another browser or device voice."
+  );
+
+  speechSynthesis.speak(utterance);
+}
+
+function startListening() {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    setStatus("Microphone recognition is unavailable in this browser. Try Chrome.");
+    return;
+  }
+
+  if (recognition) {
+    try { recognition.abort(); } catch (e) {}
+  }
+
+  recognition = new SpeechRecognition();
+  recognition.lang = voices[$("language").value];
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 3;
+
+  recognition.onstart = () => setStatus("🎙️ Listening. Say the phrase now...");
+  recognition.onresult = event => {
+    const alternatives = Array.from(event.results[0]);
+    const transcript = alternatives.map(a => a.transcript).join(" / ");
+
+    $("heard").textContent = "I heard: " + transcript;
+    setStatus("Practice complete! Compare what you said with the lesson.");
+  };
+  recognition.onerror = event => {
+    setStatus("Could not recognise speech (" + event.error +
+      "). Check microphone permission and language support.");
+  };
+  recognition.onend = () => {
+    recognition = null;
+  };
+
+  try {
+    recognition.start();
+  } catch (e) {
+    setStatus("Could not start microphone. Try again.");
+    recognition = null;
+  }
+}
+
+$("load").addEventListener("click", loadLesson);
+$("language").addEventListener("change", loadLesson);
+$("lesson").addEventListener("change", loadLesson);
+
+$("hear").addEventListener("click", () => {
+  speak(current[0]);
+});
+
+$("repeat").addEventListener("click", () => {
+  speak(current[0]);
+  setStatus("Listen first. When the tutor finishes, tap Speak now.");
+});
+
+$("listen").addEventListener("click", startListening);
+
+$("next").addEventListener("click", () => {
+  $("lesson").value =
+    (Number($("lesson").value) + 1) % 4;
+  loadLesson();
+});
+
+document.querySelectorAll("[data-lang]").forEach(button => {
+  button.addEventListener("click", () => {
+    $("language").value = button.dataset.lang;
+    loadLesson();
+    $("tutor").scrollIntoView({behavior:"smooth"});
+  });
+});
+
+$("subscribe").addEventListener("click", () => {
+  $("premiumStatus").textContent =
+    "Premium costs ₦10,000. Payment setup is coming later. No payment has been taken.";
+});
+
+loadLesson();
+</script>
 </body>
 </html>
