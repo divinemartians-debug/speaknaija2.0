@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpeakNaija</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101820;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+    h1 { color: #00d084; }
+    input, button {
+      padding: 12px;
+      border: 0;
+      border-radius: 8px;
+      margin: 6px;
+    }
+    button {
+      background: #00d084;
+      cursor: pointer;
+    }
+    #result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>SpeakNaija 🇳🇬</h1>
+  <p>Learn Naija Pidgin and connect better.</p>
+
+  <input id="search" placeholder="Search a Naija phrase">
+  <button onclick="searchPhrase()">Search</button>
+
+  <div id="result">Abeg — Please</div>
+
+  <script>
+    function searchPhrase() {
+      const phrases = {
+        "abeg": "Abeg means Please.",
+        "how far": "How far means How are you?",
+        "no wahala": "No wahala means No problem.",
+        "wetin": "Wetin means What?",
+        "i dey": "I dey means I am fine / I am here."
+      };
+
+      const word = document.getElementById("search").value
+        .trim().toLowerCase();
+
+      document.getElementById("result").textContent =
+        phrases[word] || "Phrase not found. Try another phrase.";
+    }
+  </script>
+</body>
+</html>
